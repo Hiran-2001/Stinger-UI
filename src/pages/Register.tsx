@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import registerLogo from '../assets/logo.jpg'
+import registerLogo from '../assets/RegisterLogo.jpg'
 import { useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
@@ -16,19 +16,16 @@ function Register() {
             [name]: value
         }))
     }
-
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
-
-        const response = await axios.post('http://localhost:5000/users', {
-            name: formData?.name,
-            email: formData?.email,
-            password: formData?.password
-        })
-        console.log(response.data,"dataaaaaaaaaaa");
-    
-        toast(response.data);
-
+    const handleSubmit = async (event:any) =>{
+        event.preventDefault()
+        try {
+            
+           const response = await axios.post("http://localhost:5000/users",{name:formData.name,email:formData.email,password:formData.password})
+         toast(response.data)
+        
+        } catch (error:any) {
+           toast.error(error.response.data.message)
+        }
     }
 
     return (
