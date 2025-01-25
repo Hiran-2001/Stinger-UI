@@ -4,15 +4,14 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CircularProgress } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function Register() {
-  const navigate = useNavigate()
+function Forgotpassword() {
   const [loading,setLoading]=useState(false)
   const [formData, setFormData] = useState({
-    name: "",
+
     email: "",
-    password: "",
+    
   });
   const handleChange = (event: any) => {
     setFormData((prev) => ({
@@ -25,20 +24,20 @@ function Register() {
     try {
       setLoading(true)
       if (
-        formData.name === "" ||
-        formData.email === "" ||
-        formData.password === ""
+      
+        formData.email === ""
+      
       ) {
         toast.error("Please fill all the Fields");
       }
 
-      const response = await axios.post("http://localhost:5000/users", {
-        name: formData.name,
+      const response = await axios.post("http://localhost:5000/users/forget-password", {
+        
         email: formData.email,
-        password: formData.password,
+        
       });
-      toast(response.data);
-      navigate("/login")
+      console.log(response.data)
+      toast(response.data.message);
       setLoading(false)
     } catch (error: any) {
       setLoading(false)
@@ -61,19 +60,10 @@ theme="dark"
 />
       <div className="w-full max-w-md bg-white shadow-md rounded-xl p-7">
         <h1 className="text-3xl font-bold text-purple-800 text-center mb-6">
-          Register
+          Forget Password
         </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="relative bg-[#ededed] rounded-lg">
-            <input
-              onChange={handleChange}
-              name="name"
-              type="text"
-              placeholder="Full Name"
-              className="w-full pl-10 pr-4 py-2 border-none bg-transparent text-black rounded-lg focus:outline-none"
-              
-            />
-          </div>
+          
 
           <div className="relative bg-[#ededed] rounded-lg">
             <input
@@ -85,31 +75,22 @@ theme="dark"
               
             />
           </div>
-          <div className="relative bg-[#ededed] rounded-lg">
-            <input
-              name="password"
-              onChange={handleChange}
-              placeholder="Password"
-              className="w-full pl-10 pr-10 py-2 border-none bg-transparent text-black rounded-lg focus:outline-none"
-            
-            />
 
-            <div></div>
-          </div>
+          
 
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300"
           >
 
-           { loading? <CircularProgress size="30px" /> :"Register"}
+           { loading? <CircularProgress size="30px" /> :"Get Login Link"}
           </button>
         </form>
         <p className="text-center text-gray-600 mt-6">
-          Already have an account?{" "}
-          <Link to="/login" className="text-blue-600 hover:underline">
-            Sign in
-          </Link>
+           Already have an account? {"  "}
+                    <Link to='/login' className="text-blue-600 hover:underline">
+                      Sign In
+                    </Link>
         </p>
       </div>
       <div className="w-full max-w-md bg-white shadow-md rounded-xl p-16 mr-12">
@@ -123,4 +104,4 @@ theme="dark"
   );
 }
 
-export default Register;
+export default Forgotpassword;
