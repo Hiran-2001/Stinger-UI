@@ -1,55 +1,65 @@
-import { useState } from "react";
-import Logo from "../assets/Logo.png";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { CircularProgress } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+import registerLogo from '../assets/Register-Logo.png'
+import { useCallback, useState } from 'react';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import { CircularProgress } from '@mui/material';
+import { GoShieldLock } from "react-icons/go";
 
-function Forgotpassword() {
+
+function ForgotPassword() {
+
+  const [formData, setFormData] = useState({ email: '' });
   const [loading, setLoading] = useState(false)
-  const [formData, setFormData] = useState({
+  const navigate = useNavigate()
 
-    email: "",
 
-  });
-  const handleChange = (event: any) => {
+  const handleChange = useCallback((e: any) => {
+    const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
-      [event.target.name]: event.target.value,
-    }));
-  };
+      [name]: value
+    }))
+  }, [])
+
+
   const handleSubmit = async (event: any) => {
-    event.preventDefault();
+    console.log('submit trigger');
+
+    setLoading(true)
+    event.preventDefault()
     try {
-      setLoading(true)
-      if (
 
-        formData.email === ""
-
-      ) {
-        toast.error("Please fill all the Fields");
+      if (formData.email === "") {
+        toast.error("please fill all fields")
+        setLoading(false)
+        return
       }
 
-      const response = await axios.post("http://localhost:5000/users/forget-password", {
+      const response = await axios.post("http://localhost:5000/users/forget-password", { email: formData.email })
+      toast(response?.data?.message)
+      if (response.status === 201) {
+        localStorage.setItem('token', response?.data?.token)
+        setLoading(false)
+        navigate('/')
+      }
 
-        email: formData.email,
-
-      });
-      console.log(response.data)
-      toast(response.data.message);
-      setLoading(false)
     } catch (error: any) {
+      toast.error(error.response.data.message)
       setLoading(false)
-      toast.error(error.response.data.message);
+
     }
-  };
+  }
+
+
   return (
-    <div className="min-h-screen flex items-center justify-around bg-[#dab7e6] ">
+
+    <div className=" flex w-100 h-screen bg-[#ffffff] ">
       <ToastContainer
         position="top-center"
         autoClose={3000}
-        hideProgressBar={false}
+        hideProgressBar={true}
         newestOnTop={false}
         closeOnClick={false}
         rtl={false}
@@ -57,51 +67,52 @@ function Forgotpassword() {
         draggable
         pauseOnHover
         theme="dark"
+
       />
-      <div className="w-full max-w-md bg-white shadow-md rounded-xl p-7">
-        <h1 className="text-3xl font-bold text-purple-800 text-center mb-6">
-          Forget Password
-        </h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="px-14 h-3/4 w-2/5 py-6 shadow-2xl mx-12 my-24 bg-red rounded-lg">
+
+        <div className=' flex justify-center h-52'>
+          <GoShieldLock className='size-48' />
+        </div>
+
+        <div className='flex flex-col justify-center items-center'>
+          <h2 className="text-3xl font-mono mb-6 ml-0">Trouble in login ?</h2>
+          <h5>Enter your email and we'll send you a link to get back into your account.</h5>
+        </div>
 
 
-          <div className="relative bg-[#ededed] rounded-lg">
+        <form className="w-full max-w-sm mt-5">
+
+          <div className="mb-4">
+  
             <input
               onChange={handleChange}
               name="email"
               type="email"
-              placeholder="Email"
-              className="w-full pl-10 pr-4 py-2 border-none bg-transparent text-black rounded-lg focus:outline-none"
-
+              placeholder="test@gmail.com"
+              className="w-full px-3 py-2 border rounded-lg shadow-sm text-gray-700 focus:outline-none"
             />
           </div>
 
-
-
           <button
+            onClick={handleSubmit}
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+            className="mx-12 my-5 w-3/4 bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg shadow-md focus:outline-none"
           >
-
-            {loading ? <CircularProgress size="30px" /> : "Get Login Link"}
+            {loading ? <CircularProgress size={25} /> : 'Send Login Link'}
           </button>
         </form>
-        <p className="text-center text-gray-600 mt-6">
-          Already have an account? {"  "}
-          <Link to='/login' className="text-blue-600 hover:underline">
-            Sign In
-          </Link>
-        </p>
       </div>
-      <div className="w-full max-w-md bg-white shadow-md rounded-xl p-16 mr-12">
+      <div className="hidden lg:flex items-center justify-center w-full lg:w-3/4 bg-[#000000] ">
         <img
-          className="object-contain p-8 "
-          src={Logo}
+          src={registerLogo}
           alt="Shopping Illustration"
+          className="h-2/3 rounded-lg"
         />
       </div>
     </div>
+
   );
 }
 
-export default Forgotpassword;
+export default ForgotPassword
