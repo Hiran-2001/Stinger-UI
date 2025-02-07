@@ -1,25 +1,22 @@
 
-import './App.css'
-import ForgotPassword from './pages/ForgotPassword';
-import Home from './pages/Home';
-import Login from './pages/Login';
+
+import Forgotpassword from './pages/ForgotPassword';
+import Login from './pages/Login'
 import Register from './pages/Register'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Resetpassword from './pages/Resetpassword';
 
 function App() {
-
+  
 
   return (
+   
     <Router>
       <Routes>
-        {/* Define route for Login */}
-        <Route path='/' index element={<Home />} />
-
-        {/* Define route for Register */}
-
-        <Route path="/forgot-password"  element={<ForgotPassword />} />
-        <Route path="/register"  element={<Register />} />
-        <Route path="/login"  element={<Login />} />
+        <Route path='/register' element={<Register/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/forgot-password' element ={<Forgotpassword/>} />
+        <Route path='/reset-password/:token' element ={<Resetpassword/>} />
       </Routes>
     </Router>
   )
