@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Logo from "../assets/Logo.png";
+// import Logo from "../assets/Logo.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -134,7 +134,7 @@ function Login() {
         <div className="w-1/2 bg-gradient-to-br from-blue-50 to-gray-100 flex items-center justify-center p-10">
           <img
             className="object-contain max-h-72 w-full"
-            src={Logo}
+            // src={Logo}
             alt="Learning Illustration"
           />
         </div>
