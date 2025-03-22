@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import { CircularProgress } from '@mui/material';
-import { GoShieldLock } from "react-icons/go";
+// import { GoShieldLock } from "react-icons/go";
 
 
 function ForgotPassword() {
@@ -72,7 +72,7 @@ function ForgotPassword() {
       <div className="px-14 h-3/4 w-2/5 py-6 shadow-2xl mx-12 my-24 bg-red rounded-lg">
 
         <div className=' flex justify-center h-52'>
-          <GoShieldLock className='size-48' />
+          {/* <GoShieldLock className='size-48' /> */}
         </div>
 
         <div className='flex flex-col justify-center items-center'>
