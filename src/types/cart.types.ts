@@ -7,6 +7,13 @@ export interface Product {
     size: string;
     color: string;
   }
+
+  export interface CartProduct {
+    id: string;
+    size: string;
+    color: string;
+    quantity: number
+  }
   
   export interface CartItem {
     id: string;

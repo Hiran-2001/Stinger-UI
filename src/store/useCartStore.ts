@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { CartItem, Product } from "../types/cart.types";
+import { CartItem, CartProduct, Product } from "../types/cart.types";
 import { createJSONStorage, persist } from "zustand/middleware";
 import Axios from "../utils/axios";
 import { toast } from "react-toastify";
@@ -11,7 +11,7 @@ interface CartState {
   cartCount: number;
 
   // Actions
-  addToCart: (product: Product, quantity: number) => Promise<void>;
+  addToCart: (product: CartProduct, quantity: number) => Promise<void>;
   removeFromCart: (productId: string) => Promise<void>;
   updateQuantity: (productId: string, quantity: number) => Promise<void>;
   clearCart: () => void;
