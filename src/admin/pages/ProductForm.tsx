@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Search, ChevronDown, Save, CheckCircle, CircleIcon, XCircle, Plus, Upload, PanelsTopLeft, ChartLine, Store, ShoppingCart, Wallet, Undo2, ReceiptText, TicketSlash, MoveLeft, Bell, Flag, Settings, Eye } from 'lucide-react';
+import { Search, ChevronDown, Save, CheckCircle, XCircle, Plus, Upload } from 'lucide-react';
 import Logo from "../../assets/Stinger.png"
 import AdminSidebar from './AdminSidebar';
 import Axios from '../../utils/axios';
@@ -30,8 +30,8 @@ const ProductForm = () => {
   const [categoryId, setCategoryId] = useState("");
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
-  const [price, setPrice] = useState();
-  const [stock, setStock] = useState();
+  const [price, setPrice] = useState(0);
+  const [stock, setStock] = useState(0);
 
 
   const handleColorChange = (colorValue: any) => {

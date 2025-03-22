@@ -3,7 +3,7 @@
 import Forgotpassword from './pages/Forgotpassword';
 import Login from './pages/Login'
 import Register from './pages/Register'
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Resetpassword from './pages/Resetpassword';
 import Home from './pages/Home';
 import ProductPage from './pages/ProductPage';
