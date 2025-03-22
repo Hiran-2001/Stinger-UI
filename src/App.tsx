@@ -1,6 +1,5 @@
 
 
-import Forgotpassword from './pages/Forgotpassword';
 import Login from './pages/Login'
 import Register from './pages/Register'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -14,6 +13,7 @@ import Order from './pages/Orders';
 import ProductForm from './admin/pages/ProductForm';
 import SalesPage from './admin/pages/SalesPage';
 import RefundPage from './admin/pages/RefundPage';
+import Forgotpassword from './pages/ForgotPassword';
 
 function App() {
 
