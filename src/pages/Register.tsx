@@ -2,7 +2,6 @@ import { useState } from "react";
 import Logo from "../assets/Logo.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { CircularProgress } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "../utils/axios";
 import { Loader2, Lock, Mail, User } from "lucide-react";
