@@ -13,7 +13,7 @@ import Order from './pages/Orders';
 import ProductForm from './admin/pages/ProductForm';
 import SalesPage from './admin/pages/SalesPage';
 import RefundPage from './admin/pages/RefundPage';
-import Forgotpassword from './pages/ForgotPassword';
+import ForgotPassword from './pages/ForgotPassword';
 
 function App() {
 
@@ -22,7 +22,7 @@ function App() {
       <Routes>
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/forgot-password' element={<Forgotpassword />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password/:token' element={<Resetpassword />} />
 
         <Route element={<CustomerRoute />}>

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Axios from "../utils/axios";
 import { Loader2, Mail } from "lucide-react";
 
-function Forgotpassword() {
+function ForgotPassword() {
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
 
@@ -96,4 +96,4 @@ function Forgotpassword() {
   );
 }
 
-export default Forgotpassword;
+export default ForgotPassword;
