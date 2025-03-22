@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import Logo from "../assets/Logo.png";
+import Logo from "../assets/Logo.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CircularProgress } from "@mui/material";
@@ -98,7 +98,7 @@ function Resetpassword() {
       <div className="w-full max-w-md bg-white shadow-md rounded-xl p-16 mr-12">
         <img
           className="object-contain p-8 "
-          // src={Logo}
+          src={Logo}
           alt="Shopping Illustration"
         />
       </div>
