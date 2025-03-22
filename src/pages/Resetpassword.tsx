@@ -1,14 +1,13 @@
 import { useState } from "react";
 import Logo from "../assets/logo.png";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CircularProgress } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
+import Axios from "../utils/axios";
 
 function Resetpassword() {
   const param = useParams();
-  console.log(param);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
@@ -31,13 +30,12 @@ function Resetpassword() {
       if(formData.password != formData.confirmpassword){
         toast.error("Password and Confirm Password Should be same")
       }
-      const response = await axios.patch(
+      const response = await Axios.patch(
         `http://localhost:5000/users/reset-password/${param?.token}`,
         {
           password: formData.password,
         }
       );
-      console.log(response.data);
       localStorage.setItem("token", response.data.token);
       toast(response.data.message);
       setLoading(false);
