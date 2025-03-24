@@ -19,8 +19,6 @@ function Order() {
         try {
             const response = await Axios.get("/order");
             if (response?.data) {
-                console.log(response.data, "response");
-
                 const mergedItems = response.data.flatMap((order:any) =>
                     order.orderItems.map((item:any) => ({
                         ...item,

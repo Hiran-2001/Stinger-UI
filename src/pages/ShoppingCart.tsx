@@ -43,9 +43,7 @@ function ShoppingCart() {
     }
 
 
-    const updateQuantity = (id: string, delta: number) => {
-        console.log(id,"updat id");
-        
+    const updateQuantity = (id: string, delta: number) => {        
         setQuantities((prev: any) => ({
             ...prev,
             [id]: Math.max(1, prev[id] + delta)

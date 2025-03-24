@@ -13,9 +13,7 @@ function ProductPage() {
   const [error, setError] = useState(null)
   const [filters, setFilters] = useState({ price: [50, 5000], color: null, size: null });
   const search = useProductStore(state => state.productSearch);
-  
-  console.log(categoryProducts,"categoryProducts");
-  
+    
   useEffect(() => {
       fetchProduct();
   }, [search, params?.category, filters]);
@@ -33,7 +31,6 @@ function ProductPage() {
       setCategoryProducts(product?.data?.products);
       setError(null)
     } catch (error: any) {
-      console.log(error);
       setError(error?.response?.data?.message)
     }
   }

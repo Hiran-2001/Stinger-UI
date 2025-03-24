@@ -6,8 +6,6 @@ export const ProductCard = ({ product }: any) => {
   const discountPercentage = product.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : 0;
-
-    console.log(product,"product");
     
 
   return (

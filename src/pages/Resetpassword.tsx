@@ -42,7 +42,6 @@ function Resetpassword() {
     } catch (error: any) {
       setLoading(false);
     //   toast.error(error.response.data.message);
-    console.log(error)
     }
   };
   return (

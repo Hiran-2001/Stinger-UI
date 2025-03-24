@@ -88,7 +88,6 @@ const useCartStore = create<CartState>()(
 
         } catch (error: any) {
           set({ error: error.message });
-          console.log(error.response.data.message);
           
           toast.error(error.response.data.message);
         } finally {

@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import { CircularProgress } from '@mui/material';
 import { Loader2, Mail } from 'lucide-react';
+import Axios from '../utils/axios';
 // import { GoShieldLock } from "react-icons/go";
 
 
@@ -26,8 +27,6 @@ function ForgotPassword() {
 
 
   const handleSubmit = async (event: any) => {
-    console.log('submit trigger');
-
     setLoading(true)
     event.preventDefault()
     try {
@@ -38,15 +37,14 @@ function ForgotPassword() {
         return
       }
 
-      const response = await axios.post("http://localhost:5000/users/forget-password", { email: formData.email })
+      const response = await Axios.post("users/forgot-password", { email: formData.email });
+      
       toast(response?.data?.message)
       if (response.status === 201) {
-        localStorage.setItem('token', response?.data?.token)
         setLoading(false)
-        navigate('/')
       }
 
-    } catch (error: any) {
+    } catch (error: any) {      
       toast.error(error.response.data.message)
       setLoading(false)
 
@@ -56,6 +54,18 @@ function ForgotPassword() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6 font-sans">
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="flex w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden">
         {/* Form Section */}
         <div className="w-1/2 p-10 bg-white">

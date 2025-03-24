@@ -166,12 +166,8 @@ const ProductForm = () => {
           formData.append('imageURLs', file);
         });
         
-        console.log('Number of images being sent:', imageFiles.length);
       } else {
-        console.log('No images to upload');
       }
-
-      console.log('Form data keys:', [...formData.keys()]);
 
       const response = await Axios.post('/products', formData, {
         headers: {
@@ -179,8 +175,6 @@ const ProductForm = () => {
         },
       });
       
-      console.log('Product created:', response.data);
-
     } catch (error) {
       console.error('Error creating product:', error);
     }

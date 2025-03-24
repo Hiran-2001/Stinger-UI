@@ -21,7 +21,6 @@ const Header = () => {
         setAnchorElUser(null);
     };
     const handleMenu = (action: any) => {
-        // console.log(action,"action")
         if (action === "Logout") {
             localStorage.removeItem("token");
             navigate('/login')

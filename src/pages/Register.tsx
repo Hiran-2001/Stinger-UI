@@ -5,15 +5,60 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "../utils/axios";
 import { Loader2, Lock, Mail, User } from "lucide-react";
+import axios, { AxiosError } from "axios";
+
+interface FormData {
+  name: string,
+  email: string;
+  password: string;
+}
+
+interface RegisterResponse {
+  success: boolean;
+  message: string;
+}
+
+interface ErrorResponse {
+  message: string;
+  error: string;
+  statusCode: number;
+}
 
 function Register() {
   const navigate = useNavigate()
-  const [loading, setLoading] = useState(false)
+  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState<string>('');
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
+
+  const validateForm = (): boolean => {
+    const newErrors: Partial<FormData> = {};
+
+    if (!formData?.name) {
+      newErrors.name = 'Name is required'
+    }
+
+    if (!formData?.email?.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+
+    if (!formData.password.trim()) {
+      newErrors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }
+
   const handleChange = (event: any) => {
     setFormData((prev) => ({
       ...prev,
@@ -22,31 +67,52 @@ function Register() {
   };
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    try {
-      setLoading(true)
-      if (
-        formData.name === "" ||
-        formData.email === "" ||
-        formData.password === ""
-      ) {
-        toast.error("Please fill all the Fields");
-      }
 
-      const response = await Axios.post("http://localhost:5000/users", {
+    if (!validateForm()) {
+      return
+    }
+
+    try {
+      // setLoading(true);
+      setServerError('');
+
+      const response = await Axios.post<RegisterResponse>("/users", {
         name: formData.name,
         email: formData.email,
         password: formData.password,
       });
-      toast(response.data);
-      navigate("/login")
-      setLoading(false)
+
+      if (response.data.success) {
+        toast.success(response.data.message);
+        response.data.success && navigate('/');
+        setLoading(false)
+      } else {
+
+        throw new Error(response.data.message);
+      }
+
     } catch (error: any) {
-      setLoading(false)
-      toast.error(error.response.data.message);
+      const axiosError = error as AxiosError<ErrorResponse>;
+      setServerError(axiosError.message);
+      toast.error(axiosError.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6 font-sans">
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="flex w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden">
         {/* Form Section */}
         <div className="w-1/2 p-10 bg-white">
@@ -62,6 +128,7 @@ function Register() {
                 placeholder="Full Name"
                 className="w-full pl-10 pr-4 py-3 bg-white rounded-md border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
               />
+              {errors.name && <span className="text-red-500">{errors.name}</span>}
             </div>
             <div className="relative group">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 group-focus-within:text-blue-600 transition-colors" />
@@ -72,6 +139,7 @@ function Register() {
                 placeholder="Email"
                 className="w-full pl-10 pr-4 py-3 bg-white rounded-md border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
               />
+              {errors.email && <span className="text-red-500">{errors.email}</span>}
             </div>
             <div className="relative group">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 group-focus-within:text-blue-600 transition-colors" />
@@ -82,6 +150,7 @@ function Register() {
                 placeholder="Password"
                 className="w-full pl-10 pr-4 py-3 bg-white rounded-md border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
               />
+              {errors.password && <span className="text-red-500">{errors.password}</span>}
             </div>
             <button
               type="submit"
