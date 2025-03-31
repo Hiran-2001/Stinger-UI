@@ -58,14 +58,14 @@ const Header = () => {
                       id="cart-icon"
                       aria-haspopup="true"
                     >
-                      <ShoppingCart className="text-gray-600" size={20} sm={22} md={24} />
+                      <ShoppingCart className="text-gray-600" size={20}   />
                     </Badge>
                   </Link>
                 </button>
                 
                 <button className="p-1 sm:p-2 hover:bg-gray-100 rounded-full">
                   <Link to='/order'>
-                    <Package className="text-gray-600" size={20} sm={22} md={24} />
+                    <Package className="text-gray-600" size={20}   />
                   </Link>
                 </button>
       
