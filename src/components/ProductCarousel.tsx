@@ -16,7 +16,7 @@ export const ProductCarousel = () => {
     const prevSlide = () => setCurrentSlide((prev:any) => (prev - 1 + items.length) % items.length);
   
     return (
-      <div className="relative max-w-full h-[550px]  mx-auto my-0 bg-black">
+      <div className="relative w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[550px] mx-auto my-0 bg-black">
         <div className="overflow-hidden relative h-full">
           {items.map((item, index) => (
             <div
@@ -31,21 +31,23 @@ export const ProductCarousel = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                <h2 className="text-4xl font-bold text-white">{item.name}</h2>
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center px-4">{item.name}</h2>
               </div>
             </div>
           ))}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full hover:bg-gray-100"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white p-1 sm:p-2 rounded-full hover:bg-gray-100"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={16} className="sm:hidden" />
+            <ChevronLeft size={24} className="hidden sm:block" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full hover:bg-gray-100"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white p-1 sm:p-2 rounded-full hover:bg-gray-100"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={16} className="sm:hidden" />
+            <ChevronRight size={24} className="hidden sm:block" />
           </button>
         </div>
       </div>

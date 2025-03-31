@@ -100,7 +100,7 @@ function Register() {
     }
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6 font-sans">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4 sm:p-6 font-sans">
       <ToastContainer
         position="top-center"
         autoClose={3000}
@@ -113,12 +113,12 @@ function Register() {
         pauseOnHover
         theme="dark"
       />
-      <div className="flex w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden">
-        {/* Form Section */}
-        <div className="w-1/2 p-10 bg-white">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Sign Up</h1>
-          <p className="text-gray-600 mb-8 text-sm">Start your learning journey today</p>
-          <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="flex flex-col md:flex-row w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden">
+        {/* Form Section - Full width on all screens */}
+        <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 bg-white">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Sign Up</h1>
+          <p className="text-gray-600 mb-6 sm:mb-8 text-sm">Start your learning journey today</p>
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div className="relative group">
               <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 group-focus-within:text-blue-600 transition-colors" />
               <input
@@ -128,7 +128,7 @@ function Register() {
                 placeholder="Full Name"
                 className="w-full pl-10 pr-4 py-3 bg-white rounded-md border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
               />
-              {errors.name && <span className="text-red-500">{errors.name}</span>}
+              {errors.name && <span className="text-red-500 text-sm mt-1 block">{errors.name}</span>}
             </div>
             <div className="relative group">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 group-focus-within:text-blue-600 transition-colors" />
@@ -139,7 +139,7 @@ function Register() {
                 placeholder="Email"
                 className="w-full pl-10 pr-4 py-3 bg-white rounded-md border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
               />
-              {errors.email && <span className="text-red-500">{errors.email}</span>}
+              {errors.email && <span className="text-red-500 text-sm mt-1 block">{errors.email}</span>}
             </div>
             <div className="relative group">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 group-focus-within:text-blue-600 transition-colors" />
@@ -150,7 +150,7 @@ function Register() {
                 placeholder="Password"
                 className="w-full pl-10 pr-4 py-3 bg-white rounded-md border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
               />
-              {errors.password && <span className="text-red-500">{errors.password}</span>}
+              {errors.password && <span className="text-red-500 text-sm mt-1 block">{errors.password}</span>}
             </div>
             <button
               type="submit"
@@ -164,7 +164,7 @@ function Register() {
             </button>
           </form>
           {/* Google Signup */}
-          <div className="mt-6">
+          <div className="mt-4 sm:mt-6">
             <button className="w-full flex items-center justify-center py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200">
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -175,7 +175,7 @@ function Register() {
               Google
             </button>
           </div>
-          <p className="text-center text-gray-600 mt-6 text-sm">
+          <p className="text-center text-gray-600 mt-4 sm:mt-6 text-sm">
             Already have an account?{" "}
             <Link
               to="/login"
@@ -185,8 +185,8 @@ function Register() {
             </Link>
           </p>
         </div>
-        {/* Image Section */}
-        <div className="w-1/2 bg-gradient-to-br from-blue-50 to-gray-100 flex items-center justify-center p-10">
+        {/* Image Section - Only visible on medium screens and up */}
+        <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-blue-50 to-gray-100 items-center justify-center p-10">
           <img
             className="object-contain max-h-72 w-full"
             src={Logo}

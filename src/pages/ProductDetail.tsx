@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo, Suspense, lazy } from 'react';
 import Header from '../components/Header'
 import { useParams } from 'react-router-dom'
 import Axios from '../utils/axios';
@@ -7,7 +7,10 @@ import { CircularProgress } from '@mui/material';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useCartStore from '../store/useCartStore';
-import ProductImageCarousel from '../components/ProductImageCarousel';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+
+const ProductImageCarousel = lazy(() => import('../components/ProductImageCarousel'));
 
 function ProductDetail() {
   const [quantity, setQuantity] = useState<number>(1);
@@ -31,38 +34,40 @@ function ProductDetail() {
     fetchProduct()
   }, [])
 
+  const preloadImages = (urls: string[]) => {
+    return Promise.all(
+      urls.map((url) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = url;
+          img.onload = resolve;
+        });
+      })
+    );
+  };
+
   const fetchProduct = async () => {
     try {
       setLoading(true)
       const product = await Axios.get(`/products/${param?.id}`);
+      if (product?.data?.imageURLs?.length) {
+        await preloadImages(product.data.imageURLs);
+      }
       setProduct(product?.data)
-      setLoading(false)
     } catch (error) {
       console.error(error)
+    } finally {
       setLoading(false)
     }
   }
 
-  // const addToCart=async()=>{
-  //   try {
-  //     const response : any = await Axios.post('/cart',{
-  //       product_id: product?.id,
-  //       quantity: quantity
-  //     })
-
-  //     if(response?.status === 201){
-  //       toast("Product added to cart");
-  //     }
-
-  //   } catch (error) {
-
-  //   }
-  // }
 
   const handleAddToCart = async () => {
     const product = { id: productDetails?.id, size: selectedSize, color: selectedColor, quantity: quantity }
     await addToCart(product, quantity);
   };
+
+  const memoizedProductDetails = useMemo(() => productDetails, [productDetails]);
 
   return (
     <div className="max-w-screen-xl mx-auto px-4">
@@ -79,55 +84,37 @@ function ProductDetail() {
         theme="dark"
       />
       <Header />
-      {/* <CategoryNav /> */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
-            <ProductImageCarousel
-              images={productDetails?.imageURLs || []}
-              autoPlayInterval={3000}
-            />
+
+        {/* <ProductImageCarousel
+          images={productDetails?.imageURLs || []}
+          autoPlayInterval={3000}
+        /> */}
+        <Suspense fallback={<Skeleton height={400} width="100%" />}>
+          <ProductImageCarousel images={memoizedProductDetails?.imageURLs || []} autoPlayInterval={3000} />
+        </Suspense>
 
         <div className="space-y-6">
-          <h1 className="text-4xl font-bold">{productDetails?.name}</h1>
-
-
-          {/* <div className="flex items-center gap-2">
-            <div className="flex">
-              {'★★★★'.split('').map((star, i) => (
-                <span key={i} className="text-yellow-400">
-                  {star}
-                </span>
-              ))}
-            </div>
-            <span className="text-gray-600">4/5</span>
-          </div> */}
-
-
+          <h1 className="text-4xl font-bold">{loading ? <Skeleton width={200} height={30} /> : memoizedProductDetails?.name}</h1>
           <div className="flex items-center gap-4">
-            <span className="text-3xl font-bold">₹ {productDetails?.price}</span>
-            {/* <span className="text-gray-400 line-through">₹300</span>
-            <span className="bg-red-100 text-red-600 px-2 py-1 rounded">-40%</span> */}
+            <span className="text-3xl font-bold">{loading ? <Skeleton width={100} height={30} /> : `₹ ${memoizedProductDetails?.price}`}</span>
           </div>
 
 
-          <p className="text-gray-600">
-            {productDetails?.description}
-          </p>
+          <p className="text-gray-600">{loading ? <Skeleton count={3} /> : memoizedProductDetails?.description}</p>
           <hr />
 
           <div className="space-y-2">
             <span className="text-gray-700">Select Colors</span>
             <div className="flex gap-2">
-              {productDetails?.color.map((color: any) => (
+              {memoizedProductDetails?.color?.map((color: any) => (
                 <button
                   key={color}
                   onClick={() => setSelectedColor(color)}
                   className={`w-8 h-8 rounded-full ${selectedColor === color ? 'ring-2 ring-offset-2 ring-black' : ''}`}
                   style={{ backgroundColor: color }}
-                >
-                </button>
+                ></button>
               ))}
-
-
             </div>
           </div>
 
