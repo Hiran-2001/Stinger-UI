@@ -25,7 +25,7 @@ function Home() {
         setProductList(JSON.parse(cachedProducts));
         return;
       }
-      const categoryResponse: any = await Axios.get(`/products?search=${search}&page=1&limit=20`);
+      const categoryResponse: any = await Axios.get(`/products?search=${search}&page=1&limit=10`);
       if (categoryResponse) {
         localStorage.setItem('cachedProducts', JSON.stringify(categoryResponse?.data?.products)); // ✅ Convert to JSON
         setProductList(categoryResponse?.data?.products);
