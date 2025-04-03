@@ -311,7 +311,7 @@ function ShoppingCart() {
                                                 <input
                                                     type="text"
                                                     placeholder="Add promo code"
-                                                    className="flex-1 px-4 bg-gray-200 dark:bg-gray-700 py-2 border-none rounded-3xl outline-none text-gray-800 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
+                                                    className="w-full flex-1 px-4 bg-gray-200 dark:bg-gray-700 py-2 border-none rounded-3xl outline-none text-gray-800 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 min-w-0"
                                                 />
                                             </div>
 

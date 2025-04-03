@@ -3,7 +3,7 @@ import axios from "axios";
 // Create an Axios instance
 const Axios = axios.create({
     // baseURL: "http://localhost:5000", // Set your API base URL
-    baseURL:"http://3.106.239.243:5000/"
+    baseURL: import.meta.env.VITE_BASE_URL
 });
 
 // Add a request interceptor to include the token in headers
