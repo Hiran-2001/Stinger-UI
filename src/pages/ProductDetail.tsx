@@ -169,7 +169,7 @@ function ProductDetail() {
               {loading ? (
                 <SizeSkeleton />
               ) : (
-                <div className="flex gap-2">
+                <div className="flex overflow-x-auto whitespace-nowrap gap-2 scrollbar-hide">
                   {memoizedProductDetails?.size?.map((size) => (
                     <button
                       key={size}
