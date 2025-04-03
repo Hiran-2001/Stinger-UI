@@ -14,6 +14,7 @@ import ProductForm from './admin/pages/ProductForm';
 import SalesPage from './admin/pages/SalesPage';
 import RefundPage from './admin/pages/RefundPage';
 import ForgotPassword from './pages/ForgotPassword';
+import Profile from './pages/Profile';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path='/shop/product/:id' element={<ProductDetail />} />
           <Route path='/cart' element={<ShoppingCart />} />
           <Route path='/order' element={<Order />} />
+          <Route path='/profile' element={<Profile />} />
         </Route>
 
         <Route element={<AdminRoute />}>

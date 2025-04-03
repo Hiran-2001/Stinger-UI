@@ -11,41 +11,43 @@ import Axios from '../utils/axios';
 function Home() {
   const navigate = useNavigate()
   const [productList, setProductList] = useState([]);
-  const [search,setSearch] = useState('');
-  const [cartItem,setCartItem] = useState([])
-  
-    useEffect(() => {
-        fetchProducts();
-    }, [])
+  const [search, setSearch] = useState('');
+  const [cartItem, setCartItem] = useState([])
 
-    const fetchProducts = async () => {
-        try {
-            const cachedProducts: any = localStorage.getItem('cachedProducts');
-            if (cachedProducts) {              
-                setProductList(JSON.parse(cachedProducts));
-                return;
-            }
-            const categoryResponse: any = await Axios.get(`/products?search=${search}&page=1&limit=20`);            
-            if (categoryResponse) {
-                localStorage.setItem('cachedProducts', JSON.stringify(categoryResponse?.data?.products)); // ✅ Convert to JSON
-                setProductList(categoryResponse?.data?.products);
-            }
-        } catch (error) {
-            console.error("Error fetching products:", error);
-        }
+  useEffect(() => {
+    fetchProducts();
+  }, [])
 
+  const fetchProducts = async () => {
+    try {
+      const cachedProducts: any = localStorage.getItem('cachedProducts');
+      if (cachedProducts) {
+        setProductList(JSON.parse(cachedProducts));
+        return;
+      }
+      const categoryResponse: any = await Axios.get(`/products?search=${search}&page=1&limit=20`);
+      if (categoryResponse) {
+        localStorage.setItem('cachedProducts', JSON.stringify(categoryResponse?.data?.products)); // ✅ Convert to JSON
+        setProductList(categoryResponse?.data?.products);
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
     }
 
-  
+  }
+
+
   return (
-    <div className="max-w-screen-xl mx-auto">
-      <Header/>
-      <CategoryNav />
-      <ProductCarousel/>
-      <ProductGrid products={productList} />
-      <BrowseByStyle/>
-      <div>
-        <Footer/>
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition duration-300">
+      <div className="max-w-screen-xl mx-auto">
+        <Header />
+        <CategoryNav />
+        <ProductCarousel />
+        <ProductGrid products={productList} />
+        <BrowseByStyle />
+        <div>
+          <Footer />
+        </div>
       </div>
     </div>
   )

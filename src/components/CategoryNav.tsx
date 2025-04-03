@@ -29,13 +29,13 @@ function CategoryNav() {
   }
 
   return (
-    <div className="w-full bg-white text-black py-3">
+    <div className="w-full bg-white dark:bg-gray-900 text-black dark:text-white py-3">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex flex-wrap justify-center gap-2">
           {categories.map((category: any, i: any) => (
             <Link
               key={i}
-              className="px-3 py-2 text-sm sm:text-base sm:px-4 hover:bg-gray-100 rounded transition-colors"
+              className="px-3 py-2 text-sm sm:text-base sm:px-4 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
               to={`/shop/${category?.name}`}
             >
               <button key={category?.id}></button>
