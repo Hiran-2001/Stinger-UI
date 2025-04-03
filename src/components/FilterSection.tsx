@@ -7,7 +7,7 @@ const sizes = ["XXS", "XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
 const dressStyles = ["Casual", "Formal", "Party", "Gym"];
 
 function FilterSection({ onFilterChange }: { onFilterChange: (filters: any) => void }) {
-  const [priceRange, setPriceRange] = useState<number[]>([50, 5000]);
+  const [priceRange, setPriceRange] = useState<number[]>([100, 2000]);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
