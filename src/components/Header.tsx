@@ -35,7 +35,9 @@ const Header = () => {
     setAnchorElUser(null);
   };
   const handleMenu = (action: any) => {
-    if (action === "Logout") {
+    console.log(action,"action");
+    
+    if (action.label === "Logout") {
       localStorage.removeItem("token");
       navigate('/login')
     } else if (action.path) {
