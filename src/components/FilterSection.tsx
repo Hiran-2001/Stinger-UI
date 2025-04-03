@@ -39,7 +39,7 @@ function FilterSection({ onFilterChange }: { onFilterChange: (filters: any) => v
           value={priceRange}
           onChange={handlePriceChange}
           min={0}
-          max={10000}
+          max={20000}
           valueLabelDisplay="auto"
           sx={{
             color: "black",
