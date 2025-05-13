@@ -17,6 +17,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+      
+      - name: Copy production environment
+        run: cp .env.production .env 
 
       - name: Install Dependencies
         run: npm install
