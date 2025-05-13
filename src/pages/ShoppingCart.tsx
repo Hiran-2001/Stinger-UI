@@ -186,6 +186,9 @@ function ShoppingCart() {
                 </div>
             </div>
 
+
+            
+
             <div className="mt-6">
                 <div className="flex gap-2 mb-4">
                     <Skeleton width="75%" height={44} borderRadius={24} />

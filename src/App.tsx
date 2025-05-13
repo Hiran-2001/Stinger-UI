@@ -15,11 +15,13 @@ import SalesPage from './admin/pages/SalesPage';
 import RefundPage from './admin/pages/RefundPage';
 import ForgotPassword from './pages/ForgotPassword';
 import Profile from './pages/Profile';
+import ChatbotPopup from './components/ChatbotPopup';
 
 function App() {
 
   return (
     <Router>
+      <ChatbotPopup />
       <Routes>
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />

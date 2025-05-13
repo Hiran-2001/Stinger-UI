@@ -14,8 +14,35 @@ function Home() {
   const [search, setSearch] = useState('');
   const [cartItem, setCartItem] = useState([])
 
+  const fetchChatbase=async()=>{
+    const response = await fetch('https://www.chatbase.co/api/v1/chat', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer rtil6j77r9no9gjdzxi63fiqlyyppbl5',
+      },
+      body: JSON.stringify({
+        messages: [
+          {content: 'How can I help you?', role: 'assistant'},
+          {content: 'What is chatbase?', role: 'user'},
+        ],
+        chatbotId: 'Gq2ryLPTe_izcYgRlFxbO',
+        stream: false,
+        model: 'gpt-4o-mini',
+        temperature: 0,
+      }),
+    })
+    
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw Error(errorData.message)
+    }
+    const data = await response.json()
+    console.log(data) // { "text": "..."}
+  }
+
   useEffect(() => {
     fetchProducts();
+    fetchChatbase()
   }, [])
 
   const fetchProducts = async () => {

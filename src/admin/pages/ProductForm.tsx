@@ -147,7 +147,7 @@ const ProductForm = () => {
   };
 
 
-  const handleSubmitForm = async (event:any) => {
+  const handleSubmitForm = async (event: any) => {
     try {
       event.preventDefault();
 
@@ -165,8 +165,7 @@ const ProductForm = () => {
         imageFiles.forEach(file => {
           formData.append('imageURLs', file);
         });
-        
-      } else {
+
       }
 
       const response = await Axios.post('/products', formData, {
@@ -174,7 +173,22 @@ const ProductForm = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      
+      setName("");
+      setDescription("");
+      setSize(['XS']);
+      setSelectedColor('');
+      setSelectedColors([]);
+      setImages([]);
+      setImageFiles([]);
+      setShowDefaultImage(true);
+      setCategories([])
+      setCategoryId("");
+      setPrice(0);
+      setStock(0);
+
+
+
+
     } catch (error) {
       console.error('Error creating product:', error);
     }

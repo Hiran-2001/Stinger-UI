@@ -53,7 +53,7 @@ function ForgotPassword() {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6 font-sans">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4 sm:p-6 font-sans">
       <ToastContainer
         position="top-center"
         autoClose={3000}
@@ -66,12 +66,12 @@ function ForgotPassword() {
         pauseOnHover
         theme="dark"
       />
-      <div className="flex w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden">
-        {/* Form Section */}
-        <div className="w-1/2 p-10 bg-white">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Forgot Password</h1>
-          <p className="text-gray-600 mb-8 text-sm">We'll send you a login link</p>
-          <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="flex flex-col md:flex-row w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden">
+        <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 bg-white">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Forgot Password</h1>
+          <p className="text-gray-600 mb-6 sm:mb-8 text-sm">We'll send you a login link</p>
+       
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div className="relative group">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 group-focus-within:text-blue-600 transition-colors" />
               <input
@@ -82,6 +82,7 @@ function ForgotPassword() {
                 className="w-full pl-10 pr-4 py-3 bg-white rounded-md border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
               />
             </div>
+
             <button
               type="submit"
               className="w-full bg-blue-600 text-white py-3 rounded-md font-medium shadow-sm hover:bg-blue-700 hover:shadow-md active:scale-95 transition-all duration-200 flex items-center justify-center gap-2"
@@ -93,6 +94,7 @@ function ForgotPassword() {
               )}
             </button>
           </form>
+
           <p className="text-center text-gray-600 mt-6 text-sm">
             Already have an account?{" "}
             <Link
@@ -103,8 +105,8 @@ function ForgotPassword() {
             </Link>
           </p>
         </div>
-        {/* Image Section */}
-        <div className="w-1/2 bg-gradient-to-br from-blue-50 to-gray-100 flex items-center justify-center p-10">
+        {/* Image Section - Hidden on small screens */}
+        <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-blue-50 to-gray-100 items-center justify-center p-10">
           <img
             className="object-contain max-h-72 w-full"
             src={Logo}
@@ -114,6 +116,7 @@ function ForgotPassword() {
       </div>
     </div>
   );
+  
 }
 
 export default ForgotPassword
