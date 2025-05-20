@@ -15,7 +15,7 @@ function ProductPage() {
   const [showFilters, setShowFilters] = useState(false)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({ price: [100, 2000], color: null, size: null });
+  const [filters, setFilters] = useState({ price: [100, 15000], color: null, size: null });
   const search = useProductStore(state => state.productSearch);
 
   useEffect(() => {
