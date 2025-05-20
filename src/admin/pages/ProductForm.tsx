@@ -181,7 +181,6 @@ const ProductForm = () => {
       setImages([]);
       setImageFiles([]);
       setShowDefaultImage(true);
-      setCategories([])
       setCategoryId("");
       setPrice(0);
       setStock(0);
