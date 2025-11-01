@@ -1,10 +1,44 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Search, ChevronDown, Download, Filter } from 'lucide-react';
 import AdminSidebar from './AdminSidebar';
+import Axios from '../../utils/axios';
 
 const SalesPage = () => {
+    const [orderProduct,setOrderProducts] = useState([])
+    const [ordersDetails,setOrdersDetails] = useState({totalSales:0, orders: 0, customer:0,avgOrderValue: 0})
     const [period, setPeriod] = useState('This Week');
     const [status, setStatus] = useState('All');
+
+    
+    useEffect(() => {
+        fetchOrders();
+        calculateDetails()
+    }, [])
+
+    const fetchOrders = async () => {
+        const orders = await Axios.get(`order/admin/all`);
+        setOrderProducts(orders?.data);
+    }
+
+    console.log(orderProduct);
+    
+
+    const calculateDetails=()=>{
+        console.log("debug...................");
+        
+        let totalSales = 0
+        let totalOrder = orderProduct?.length;
+        let avgOrderValue = 0;
+    //     orderProduct?.map((_orderProduct)=>{
+    //      totalSales += _orderProduct?.totalAmount;
+    //    }) 
+    //    avgOrderValue = totalSales / totalOrder
+       console.log(totalSales,totalOrder,avgOrderValue);
+       
+       setOrdersDetails({totalSales: totalSales, orders:totalOrder, customer:2,avgOrderValue:avgOrderValue})
+    }
+
+
 
     // Sample sales data
     const salesData = [
@@ -47,22 +81,22 @@ const SalesPage = () => {
                 <div className="grid grid-cols-4 gap-4 mb-6">
                     <div className="bg-white p-4 rounded-lg shadow-sm">
                         <p className="text-sm text-gray-500">Total Sales</p>
-                        <h3 className="text-xl font-semibold mt-1">$12,345.67</h3>
+                        <h3 className="text-xl font-semibold mt-1">₹ {ordersDetails.totalSales}</h3>
                         <p className="text-xs text-green-500 mt-1">+12.5% from last week</p>
                     </div>
                     <div className="bg-white p-4 rounded-lg shadow-sm">
                         <p className="text-sm text-gray-500">Orders</p>
-                        <h3 className="text-xl font-semibold mt-1">124</h3>
+                        <h3 className="text-xl font-semibold mt-1">{ordersDetails.orders}</h3>
                         <p className="text-xs text-green-500 mt-1">+8.2% from last week</p>
                     </div>
                     <div className="bg-white p-4 rounded-lg shadow-sm">
                         <p className="text-sm text-gray-500">Customers</p>
-                        <h3 className="text-xl font-semibold mt-1">87</h3>
+                        <h3 className="text-xl font-semibold mt-1">{ordersDetails.customer}</h3>
                         <p className="text-xs text-green-500 mt-1">+5.7% from last week</p>
                     </div>
                     <div className="bg-white p-4 rounded-lg shadow-sm">
                         <p className="text-sm text-gray-500">Avg. Order Value</p>
-                        <h3 className="text-xl font-semibold mt-1">$99.56</h3>
+                        <h3 className="text-xl font-semibold mt-1">{ordersDetails.avgOrderValue}</h3>
                         <p className="text-xs text-red-500 mt-1">-2.3% from last week</p>
                     </div>
                 </div>

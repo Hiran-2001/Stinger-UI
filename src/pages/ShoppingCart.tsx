@@ -38,7 +38,6 @@ function ShoppingCart() {
         try {
             setLoading(true);
             const response = await Axios.get('cart');
-            console.log(response);
 
             if (response) {
                 setCartData(response?.data?.data)
@@ -53,7 +52,6 @@ function ShoppingCart() {
 
 
     // const updateQuantity = (id: string, delta: number) => {
-    //     console.log(id,"id");
 
     //     setQuantities((prev: any) => ({
 
@@ -63,7 +61,6 @@ function ShoppingCart() {
     // };
 
     const updateQuantity = (id: string, delta: number) => {
-        console.log(id, "id");
 
         setQuantities((prev: any) => {
             const newPrev = prev || {}; // Ensure prev is always an object
@@ -79,7 +76,6 @@ function ShoppingCart() {
     }
 
     const handleOrder = async (orderData: any) => {
-        console.log(orderData);
         const orderItems = cartData.map(item => ({
             productId: item.product_id,  // Ensure it's mapped correctly
             quantity: item.quantity,
@@ -91,7 +87,6 @@ function ShoppingCart() {
             const response = await Axios.post("/order", {
                 items: orderItems
             })
-            console.log(response, "order response");
             setMadeOrder(true)
         } catch (error) {
             console.error("Order API error", error);
@@ -117,9 +112,9 @@ function ShoppingCart() {
                 handler: function (response: any) {
                     alert("Payment Successful!");
                     handleOrder(cartData)
-                    console.log("Payment ID:", response);
-                    console.log("Order ID:", response.razorpay_order_id);
-                    console.log("Signature:", response.razorpay_signature);
+                    // console.log("Payment ID:", response);
+                    // console.log("Order ID:", response.razorpay_order_id);
+                    // console.log("Signature:", response.razorpay_signature);
                 },
                 prefill: {
                     name: "John Doe",
@@ -134,7 +129,7 @@ function ShoppingCart() {
             const razorpay = new (window as any).Razorpay(options);
             razorpay.open();
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
 
     };

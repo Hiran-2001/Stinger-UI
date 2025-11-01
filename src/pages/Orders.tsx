@@ -13,7 +13,6 @@ function Order() {
     const [orderItems, setOrderItems] = useState([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-    console.log(orderItems, "order item");
 
     useEffect(() => {
         fetchOrderItems();

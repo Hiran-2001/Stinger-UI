@@ -4,6 +4,7 @@ import Logo from "../../assets/Stinger.png"
 import AdminSidebar from './AdminSidebar';
 import Axios from '../../utils/axios';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { ToastContainer, toast } from "react-toastify";
 
 
 const ProductForm = () => {
@@ -173,6 +174,10 @@ const ProductForm = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
+
+      if(response){
+        toast.success("product added successfully")
+      }
       setName("");
       setDescription("");
       setSize(['XS']);
@@ -196,6 +201,18 @@ const ProductForm = () => {
 
   return (
     <div className="flex h-screen bg-gray-100">
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <AdminSidebar />
       <div className="flex-1 overflow-auto">
         {/* Header */}

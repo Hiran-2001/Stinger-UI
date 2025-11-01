@@ -35,7 +35,6 @@ const Header = () => {
     setAnchorElUser(null);
   };
   const handleMenu = (action: any) => {
-    console.log(action,"action");
     
     if (action.label === "Logout") {
       localStorage.removeItem("token");
@@ -49,7 +48,7 @@ const Header = () => {
     <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-4">
         <div className="flex items-center justify-between gap-2 sm:gap-4 md:gap-8">
-          <div className="bg-black h-12 w-24 sm:h-16 sm:w-32 md:h-20 md:w-40 flex-shrink-0">
+          <div className=" h-12 w-24 sm:h-16 sm:w-32 md:h-20 md:w-40 flex-shrink-0">
             <Link to="/">
               <img src={Logo} alt="Visa" className="h-12 w-24 sm:h-16 sm:w-32 md:h-24 md:w-40" />
             </Link>
@@ -113,6 +112,7 @@ const Header = () => {
                   {menuItems.map((setting, _i) => (
                     <MenuItem onClickCapture={() => handleMenu(setting)} key={_i} onClick={handleCloseUserMenu}>
                       <Typography sx={{ textAlign: 'center' }}>{setting.label}</Typography>
+                      {/* <div>{setting.icon}</div> */}
                     </MenuItem>
                   ))}
                 </Menu>

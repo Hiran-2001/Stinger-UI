@@ -2,14 +2,22 @@ import { Slider } from '@mui/material';
 import { Check, ChevronDown, ChevronRight, ChevronUp, SlidersHorizontal } from 'lucide-react';
 import React, { useState } from 'react'
 
-const colors = ["#00ff00", "#ff0000", "#ff6600", "#ffcc00", "#0000ff", "#ff00ff", "#ffffff", "#000000"];
-const sizes = ["XXS", "XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
+const colors = ["Black", "Grey", "White", "Brown", "Beige", "Red", "Pink", "Orange","Yellow","Green","Turquoise","Blue","Purple","Gold","Silver"];
+const sizes = ["XS", "S", "M", "L", "XL", "2XL", "3XL", 
+  'UK6',
+  'UK7',
+  'UK8',
+  'UK9',
+  'UK10',
+  'UK11',
+  'UK12',];
 const dressStyles = ["Casual", "Formal", "Party", "Gym"];
 
 function FilterSection({ onFilterChange }: { onFilterChange: (filters: any) => void }) {
-  const [priceRange, setPriceRange] = useState<number[]>([100, 2000]);
+  const [priceRange, setPriceRange] = useState<number[]>([100, 15000]);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+
 
   const theme = localStorage.getItem("theme")
 
@@ -26,7 +34,7 @@ function FilterSection({ onFilterChange }: { onFilterChange: (filters: any) => v
     onFilterChange(filters);  // 🔥 Pass filters up to parent component
   };
   return (
-    <div className="w-full lg:w-72 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-2xl p-5 shadow-md transition duration-300">
+    <div className="w-full lg:w-72 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md p-5 shadow-md transition duration-300">
       <div className="flex justify-between items-center">
         <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100">Filters</h3>
         <SlidersHorizontal className='dark:text-gray-100' />
@@ -52,13 +60,13 @@ function FilterSection({ onFilterChange }: { onFilterChange: (filters: any) => v
       {/* Colors */}
       <div className="mb-6">
         <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-2">Colors</h4>
-        <div className="grid grid-cols-5 gap-2">
+        <div className="grid grid-cols-8 gap-2">
           {colors.map((color) => (
             <div
               key={color}
               className={`w-6 h-6 rounded-full border-2 cursor-pointer ${selectedColor === color
-                  ? "border-black dark:border-white"
-                  : "border-gray-300 dark:border-gray-600"
+                ? "border-black dark:border-white"
+                : "border-gray-300 dark:border-gray-600"
                 }`}
               style={{ backgroundColor: color }}
               onClick={() => setSelectedColor(color)}
@@ -75,8 +83,8 @@ function FilterSection({ onFilterChange }: { onFilterChange: (filters: any) => v
             <button
               key={size}
               className={`text-sm font-medium rounded-3xl px-4 py-2 transition-all ${selectedSize === size
-                  ? 'bg-black dark:bg-gray-50 text-white dark:text-gray-700'
-                  : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-400"
+                ? 'bg-black dark:bg-gray-50 text-white dark:text-gray-700'
+                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-400"
                 }`}
               onClick={() => setSelectedSize(size)}
             >

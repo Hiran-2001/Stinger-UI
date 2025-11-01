@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Axios from '../utils/axios'
 import { useParams } from 'react-router-dom'
 import Header from '../components/Header';
@@ -18,20 +18,25 @@ function ProductPage() {
   const [filters, setFilters] = useState({ price: [100, 15000], color: null, size: null });
   const search = useProductStore(state => state.productSearch);
 
-  useEffect(() => {
-    fetchProduct();
-  }, [search, params?.category, filters]);
+  const debounce = (func, wait) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), wait);
+    };
+  };
 
-
+  
   const fetchProduct = async () => {
     try {
       setLoading(true);
       const { price, color, size } = filters;
 
+      
       let query = `/products?search=${search}&limit=20&category=${params?.category}`;
       if (price) query += `&minPrice=${price[0]}&maxPrice=${price[1]}`;
-      // if (color) query += `&color=${color}`;
-      // if (size) query += `&size=${size}`;
+      if (color) query += `&color=${color}`;
+      if (size) query += `&size=${size}`;
       const product = await Axios.get(query);
       setCategoryProducts(product?.data?.products);
       setError(null)
@@ -42,6 +47,13 @@ function ProductPage() {
     }
   }
 
+  const debouncedFetchProduct = useCallback(debounce(fetchProduct, 500), [params?.category]);
+
+  useEffect(() => {
+    debouncedFetchProduct();
+  }, [search, params?.category, filters, debouncedFetchProduct]);
+
+  
   const FilterSectionSkeleton = () => (
     <div className="space-y-6">
       <div>

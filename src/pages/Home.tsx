@@ -37,7 +37,6 @@ function Home() {
       throw Error(errorData.message)
     }
     const data = await response.json()
-    console.log(data) // { "text": "..."}
   }
 
   useEffect(() => {

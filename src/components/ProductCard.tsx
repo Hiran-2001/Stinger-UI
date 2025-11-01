@@ -9,13 +9,13 @@ export const ProductCard = ({ product }: any) => {
 
 
   return (
-    <div className="bg-white dark:bg-gray-800 dark:text-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+    <div className="bg-white dark:bg-gray-800 dark:text-white p-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
       <Link to={`/shop/product/${product?.id}`}>
         <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-2 flex items-center justify-center h-56 sm:h-64 md:h-72">
           <img
             src={product?.imageURLs[0]}
             alt={product?.name}
-            className="w-auto h-full max-h-48 sm:max-h-56 md:max-h-64 object-contain mx-auto"
+            className="w-full h-full rounded-xl max-h-48 sm:max-h-56 md:max-h-64 object-contain mx-auto"
           />
         </div>
 
