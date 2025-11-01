@@ -18,8 +18,10 @@ jobs:
         with:
           node-version: 18
       
-      - name: Copy production environment
-        run: cp .env.production .env 
+      - name: Create .env file
+        run: |
+          echo "REACT_APP_API_URL=${{secrets.REACT_APP_API_URL }}" >> .env
+          echo "REACT_APP_ENV=production" >> .env
 
       - name: Install Dependencies
         run: npm install
