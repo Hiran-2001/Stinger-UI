@@ -1,20 +1,50 @@
+/* Stinger UI - Professional Monochrome Theme */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Remove unnecessary global styles */
 :root {
-
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-tertiary: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --border-color: #222222;
+  --accent: #ffffff;
 }
 
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+}
 
-#root {
-  width: 100%;
+/* Professional Card */
+.card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  border-color: #444;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+}
+
+/* Elegant Buttons */
+.btn {
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: white;
+  color: black;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: #e5e5e5;
+  transform: translateY(-1px);
 }
