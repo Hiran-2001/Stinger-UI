@@ -22,7 +22,7 @@ export default {
         accent: '#ffffff',
       },
       fontFamily: {
-        sans: ['Inter', 'system_ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
       },
     },
   },
